@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class QuadTreeTest extends junit.framework.TestCase {
 
@@ -57,20 +58,23 @@ public class QuadTreeTest extends junit.framework.TestCase {
     @Test
     public void testSearchIntersects() {
         QuadTree qt = getTree();
-        Point[] points = qt.searchIntersect(4, 0, 51, 98);
+        final List<Point> pointsList = qt.searchIntersect(4, 0, 51, 98);
+        Point[] points = pointsList.toArray(new Point[pointsList.size()]);
         Arrays.sort(points);
         String keyString = Arrays.asList(points).toString();
         String expected = "[(5.0, 20.0), (12.0, 0.0), (47.0, 96.0), (50.0, 32.0), (50.0, 50.0)]";
         assertEquals("Sorted keys should be " + expected, expected, keyString);
 
 
-        Point[] points2 = qt.searchIntersect(5, 0, 50, 96);
+        List<Point> pointList2 = qt.searchIntersect(5, 0, 50, 96);
+        Point[] points2 = pointList2.toArray(new Point[pointList2.size()]);
         Arrays.sort(points2);
         String keyString2 = Arrays.asList(points).toString();
         String expected2 = "[(5.0, 20.0), (12.0, 0.0), (47.0, 96.0), (50.0, 32.0), (50.0, 50.0)]";
         assertEquals("Sorted keys should be " + expected2, expected2, keyString2);
 
-        Point[] points3 = qt.searchIntersect(55, 0, 50, 96);
+        List<Point> pointList3 = qt.searchIntersect(55, 0, 50, 96);
+        Point[] points3 = pointList3.toArray(new Point[pointList3.size()]);
         assertEquals("Should return no points for higher x",0,points3.length);
     }
 

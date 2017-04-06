@@ -1,11 +1,11 @@
-public class Node {
+public class Node<T> {
 
     private double x;
     private double y;
     private double w;
     private double h;
     private Node opt_parent;
-    private Point point;
+    private Point<T> point;
     private NodeType nodetype = NodeType.EMPTY;
     private Node nw;
     private Node ne;
@@ -62,19 +62,19 @@ public class Node {
         this.h = h;
     }
 
-    public Node getParent() {
+    public Node<T> getParent() {
         return opt_parent;
     }
 
-    public void setParent(Node opt_parent) {
+    public void setParent(Node<T> opt_parent) {
         this.opt_parent = opt_parent;
     }
 
-    public void setPoint(Point point) {
+    public void setPoint(Point<T> point) {
         this.point = point;
     }
 
-    public Point getPoint() {
+    public Point<T> getPoint() {
         return this.point;
     }
 
@@ -87,35 +87,35 @@ public class Node {
     }
 
 
-    public void setNw(Node nw) {
+    public void setNw(Node<T> nw) {
         this.nw = nw;
     }
 
-    public void setNe(Node ne) {
+    public void setNe(Node<T> ne) {
         this.ne = ne;
     }
 
-    public void setSw(Node sw) {
+    public void setSw(Node<T> sw) {
         this.sw = sw;
     }
 
-    public void setSe(Node se) {
+    public void setSe(Node<T> se) {
         this.se = se;
     }
 
-    public Node getNe() {
+    public Node<T> getNe() {
         return ne;
     }
 
-    public Node getNw() {
+    public Node<T> getNw() {
         return nw;
     }
 
-    public Node getSw() {
+    public Node<T> getSw() {
         return sw;
     }
 
-    public Node getSe() {
+    public Node<T> getSe() {
         return se;
     }
 }

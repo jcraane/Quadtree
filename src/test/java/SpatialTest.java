@@ -2,7 +2,8 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class SpatialTest {
 
     static List<Point> _pointList = null;
 
-    private void LoadPointsFromFile(String source) {
+    private void LoadPointsFromFile(InputStream source) {
         String[] item;
         String[] lines = readAllTextFileLines(source);
         for (String line : lines) {
@@ -21,13 +22,13 @@ public class SpatialTest {
         }
     }
 
-    private static String[] readAllTextFileLines(String fileName) {
+    private static String[] readAllTextFileLines(InputStream source) {
         StringBuilder sb = new StringBuilder();
 
         try {
             String textLine;
 
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            BufferedReader br = new BufferedReader(new InputStreamReader(source));
 
             while ((textLine = br.readLine()) != null) {
                 sb.append(textLine);
@@ -45,9 +46,10 @@ public class SpatialTest {
     @Test
     public void testTree(){
         _pointList = new ArrayList<Point>();
-        URL classpathResource = Thread.currentThread().getContextClassLoader().getResource("");
-        String resourcePath = classpathResource.getPath()+"points.txt";
-        LoadPointsFromFile(resourcePath);
+        final InputStream is = getClass().getResourceAsStream("points.txt");
+//        URL classpathResource = Thread.currentThread().getContextClassLoader().getResource("");
+//        String resourcePath = classpathResource.getPath()+"points.txt";
+        LoadPointsFromFile(is);
         assertEquals("Expecting 844 points",844,_pointList.size());
 
         //http://spatialreference.org/ref/epsg/4326/
@@ -56,9 +58,9 @@ public class SpatialTest {
         {
             qt.set(pt.getX(), pt.getY(), pt.getValue());
         }
-        Point[] points = qt.searchIntersect(-84.375,27.059,-78.75,31.952 );
+        List<Point> points = qt.searchIntersect(-84.375,27.059,-78.75,31.952 );
         //System.out.print( Arrays.asList(points).toString());
-        assertEquals(60,points.length);
+        assertEquals(60,points.size());
 
     }
 

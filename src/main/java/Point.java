@@ -1,8 +1,7 @@
-public class Point implements Comparable {
-
+public class Point<T> implements Comparable {
     private double x;
     private double y;
-    private Object opt_value;
+    private T opt_value;
 
     /**
      * Creates a new point object.
@@ -11,7 +10,7 @@ public class Point implements Comparable {
      * @param {double} y The y-coordinate of the point.
      * @param {Object} opt_value Optional value associated with the point.     
      */
-    public Point(double x, double y, Object opt_value) {
+    public Point(double x, double y, T opt_value) {
         this.x = x;
         this.y = y;
         this.opt_value = opt_value;
@@ -33,11 +32,11 @@ public class Point implements Comparable {
         this.y = y;
     }
 
-    public Object getValue() {
+    public T getValue() {
         return opt_value;
     }
 
-    public void setValue(Object opt_value) {
+    public void setValue(T opt_value) {
         this.opt_value = opt_value;
     }
 
